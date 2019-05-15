@@ -35,6 +35,7 @@ public class BookController {
     @RequestMapping("saveType")
     public void saveType(BooksBean booksBean){
         System.out.println(booksBean);
+        System.out.println(22222);
         bookService.saveType(booksBean);
     }
 
