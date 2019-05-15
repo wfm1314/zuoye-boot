@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.dao.BookDao">
+    <select id="findNavTreeByPid" resultType="com.jk.model.TreeBean" parameterType="int">
+     select id,text,url,pid from t_tree where pid=#{pid}
+    </select>
+
+    <select id="findType" resultType="com.jk.model.TypeBean">
+     select * from book_type
+    </select>
+
+    <select id="findType2" resultType="com.jk.model.TypeBean" parameterType="int">
+     select typename from book_type where id=#{value}
+    </select>
+</mapper>

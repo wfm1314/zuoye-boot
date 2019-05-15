@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 引入easyui样式文件 -->
+    <link type="text/css" rel="stylesheet" href="/js/jquery-easyui-1.5/themes/default/easyui.css">
+    <!-- 引入easyui图标样式文件 -->
+    <link type="text/css" rel="stylesheet" href="/js/jquery-easyui-1.5/themes/icon.css">
+    <!-- 引入jquery js文件 -->
+    <script type="text/javascript" src="/js/jquery-easyui-1.5/jquery.min.js"></script>
+    <!-- 引入easyui的js文件 -->
+    <script type="text/javascript" src="/js/jquery-easyui-1.5/jquery.easyui.min.js"></script>
+    <!-- 引文easyui支持中文js -->
+    <script type="text/javascript" src="/js/jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+<div class="easyui-layout" data-options="fit:true">
+    <form id="typeForm" method="post">
+        <table>
+            <tr>
+                <td>图书名称</td>
+                <td>
+                    <input class="easyui-textbox" name="bname">
+                </td>
+            </tr>
+
+            <tr>
+                <td>图书价格</td>
+                <td>
+                    <input class="easyui-textbox" name="price">
+                </td>
+            </tr>
+
+            <tr>
+                <td>图书类型</td>
+                <td>
+                    <input class="easyui-combobox" name="btype" id="btypeSelect">
+                </td>
+            </tr>
+
+            <tr>
+                <td>图书简介</td>
+                <td>
+                    <input class="easyui-textbox" name="bjianjie" data-options="multiline:true,height:100">
+                </td>
+            </tr>
+
+            <tr>
+                <td>作者笔名</td>
+                <td>
+                    <input class="easyui-textbox" name="bbiming">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div id="buttons">
+        <a class="easyui-linkbutton" onclick="saveType()" data-options="iconCls:'icon-ok'" >保存</a>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+
+    $(function(){
+
+        initType();
+    })
+
+
+    //保存用户数据
+    function saveType(){
+        $("#typeForm").form("submit",{
+            url:"../books/saveType",
+            success:function(){
+                $.messager.alert("提示","保存成功！","info");
+            }
+        })
+    }
+
+    //初始化类型数据
+    function initType(){
+        $("#btypeSelect").combobox({
+            url:"../books/findType",
+            valueField:"id",
+            textField:"typename",
+        })
+    }
+
+</script>
+</html>

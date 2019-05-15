@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 引入jequery -->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <!-- 引入bootstrap的css、js文件 -->
+    <link rel="stylesheet" href="/js/bootstrap3/css/bootstrap.css">
+    <script type="text/javascript" src="/js/bootstrap3/js/bootstrap.js"></script>
+    <!-- 引入bootstrap的table文件 -->
+    <link rel="stylesheet" href="/js/bootstrap-table/bootstrap-table.css">
+    <script type="text/javascript" src="/js/bootstrap-table/bootstrap-table.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <!-- 引入bootstrap bootbox的css、js -->
+    <script type="text/javascript" src="/js/bootstrap-bootbox/bootbox.js"></script>
+    <!-- 引入bootstrap 日期 -->
+    <script src="/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="/js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <link type="text/css" rel="stylesheet" href="/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <!-- 引入bootstrap fileinput的css、js -->
+    <link type="text/css" rel="stylesheet" href="/js/bootstrap-fileinput/css/fileinput.css">
+    <script type="text/javascript" src="/js/bootstrap-fileinput/js/fileinput.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-fileinput/js/locales/zh.js"></script>
+</head>
+<body>
+<div id="toolbar">
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="product_title">标题</label>
+            <input type="text" class="form-control" id="product_title" placeholder="请输入标题">
+        </div>
+        <button type="button" class="btn btn-primary glyphicon glyphicon-search" onclick="searchUser()">搜索一下</button>
+    </form>
+</div>
+<table class="table" id="solrTable"></table>
+
+</body>
+<script type="text/javascript">
+
+    $(function(){
+
+        initSolrTable();
+    })
+
+
+    //条查
+    function searchUser(){
+        $('#solrTable').bootstrapTable('refresh');
+    }
+
+    //初始化表格
+    function initSolrTable(){
+        $('#solrTable').bootstrapTable({
+            toolbar:'#toolbar',
+            url:"../solr/search",//获取数据地址
+            pagination:true, //是否展示分页
+            pageList:[1, 2, 3, 5, 10, 20, 50],//分页组件
+            pageNumber:1,
+            pageSize:3,//默认每页条数
+            sidePagination:'server',//分页方式：client客户端分页，server服务端分页（*
+            striped:true,
+            queryParams:function(){
+                return {
+                    page: this.pageNumber,
+                    rows: this.pageSize,
+                    product_title:$("#product_title").val()
+                };
+            },
+            columns:[
+                {field:'checkbox',checkbox:true},
+                {field:'id',title:"id"},
+                {field:'product_title',title:"名称"},
+                {field:'product_price',title:"价格"},
+                {field:'product_sell_point',title:"介绍"},
+                {field:'product_num',title:"数量"},
+
+            ]
+        });
+
+
+    }
+
+</script>
+</html>
