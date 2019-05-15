@@ -36,6 +36,7 @@ public class BookController {
     public void saveType(BooksBean booksBean){
         System.out.println(booksBean);
         System.out.println(22222);
+        System.out.println(222);
         bookService.saveType(booksBean);
     }
 
