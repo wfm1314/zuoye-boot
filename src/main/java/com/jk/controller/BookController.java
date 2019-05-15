@@ -37,6 +37,7 @@ public class BookController {
         System.out.println(booksBean);
         System.out.println(22222);
         System.out.println(222);
+        System.out.println("鑫帅么猴");
         bookService.saveType(booksBean);
     }
 
